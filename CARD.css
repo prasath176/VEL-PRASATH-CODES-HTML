@@ -1,0 +1,11 @@
+
+body{
+   background-color: rgb(241, 199, 12);
+}
+#photocard{
+    width: 500px ;
+    height: 500px;
+    background-color: aliceblue;
+    border-radius: 50px;
+    text-align: center;
+}
