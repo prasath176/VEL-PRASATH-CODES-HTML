@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loop Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+    }
+    #output {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      background-color: #f2f2f2;
+      padding: 10px;
+      border: 1px solid #ccc;
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>JavaScript Loop Examples</h2>
+
+  <button onclick="runWhileLoop()">Print 1 to 10 (while loop)</button>
+  <button onclick="runDoWhileLoop()">Enter number 5 (do-while loop)</button>
+  <button onclick="calculateSum()">Sum of 1 to N (for loop)</button>
+  <button onclick="printMultiplicationTable()">Multiplication Table</button>
+
+  <div id="output"></div>
+
+  <script>
+    function printOutput(message) {
+      document.getElementById("output").innerText = message;
+    }
+
+    // 1. while loop: print 1 to 10
+    function runWhileLoop() {
+      let i = 1;
+      let result = "Numbers from 1 to 10:\n";
+      while (i <= 10) {
+        result += i + "\n";
+        i++;
+      }
+      printOutput(result);
+    }
+
+    // 2. do-while loop: stop at 5
+    function runDoWhileLoop() {
+      let userInput;
+      let result = "";
+      do {
+        userInput = prompt("Enter number 5 to stop:");
+        result += `You entered: ${userInput}\n`;
+      } while (parseInt(userInput) !== 5);
+      result += "Correct input received.";
+      printOutput(result);
+    }
+
+    // 3. for loop: sum of first N numbers
+    function calculateSum() {
+      let N = parseInt(prompt("Enter a number N:"));
+      if (isNaN(N) || N < 1) {
+        printOutput("Please enter a valid positive number.");
+        return;
+      }
+      let sum = 0;
+      for (let j = 1; j <= N; j++) {
+        sum += j;
+      }
+      printOutput(`Sum of first ${N} natural numbers is: ${sum}`);
+    }
+
+    // 4. nested for loop: multiplication table
+    function printMultiplicationTable() {
+      let output = "Multiplication Table (1 to 10):\n\n";
+      for (let row = 1; row <= 10; row++) {
+        let line = "";
+        for (let col = 1; col <= 10; col++) {
+          line += (row * col).toString().padStart(4, ' ');
+        }
+        output += line + "\n";
+      }
+      printOutput(output);
+    }
+  </script>
+
+</body>
+</html>
