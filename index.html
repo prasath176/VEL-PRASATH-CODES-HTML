@@ -1,46 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-  <h1>Calulated using java</h1>
-  <form >
-      <label></label>
-      <input type="number" placeholder="Enter the value 1">
-    
-      <label></label>
-      <input type="number" placeholder="Enter the value 2"><br>
+    <script>
+        function reverseWords(sentence) {
+            return sentence.split(" ").reverse().join(" ");
+        }
 
-    <select name="" id="">
-      <option value="add">add</option>
-      <option value="mlutiplication">multiplication</option>
-    <select> 
-         <button>calc</button>
-          <div>result</div>
-          <script>
-            function Calulate{
-            let num1=parseInt  (document.getElementById("num1").value);
-            let num2=parseInt(document.getElementById("num").value);
-            let operation=document.getElementById("operations").value;
-            let result;
-            if (isNan(num1)|| isnan(num2)){
-                let result ="enter the valid num";
-            }else{
-             switch (operation){
-              case "add":
-                result=num1 +num2;
-                break;
-              case "multiplication"  
-                result  =num1*num2:       
-            } 
+        function removeDuplicates(arr) {
+            return [...new Set(arr)];
+        }
+
+        function countVowels(str) {
+            const vowels = 'aeiouAEIOU';
+            let count = 0;
+            for (let char of str) {
+                if (vowels.includes(char)) {
+                    count++;
+                }
             }
-            }
-            }
-          </script>
-    </form>
+            return count;
+        }
+
+        console.log("Reversed Words:", reverseWords("this is java language"));
+        console.log("Array without duplicates:", removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+        console.log("Number of vowels:", countVowels("kg"));
+    </script>
 </body>
 </html>
