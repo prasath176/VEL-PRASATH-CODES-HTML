@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Management</title>
+</head>
+<body>
+  <script>
+    let employees = [];
+
+    // Add an employee
+    function addEmp(id, name, salary, role) {
+      employees.push({ id, name, salary, role });
+      console.log("Added:", name);
+    }
+
+    // Calculate total salary
+    function calculateSal() {
+      let total = employees.reduce((sum, emp) => sum + emp.salary, 0);
+      console.log("Total Salary:", total);
+    }
+
+    // Update employee details
+    function updateEmp(id, newDetail) {
+      let emp = employees.find(e => e.id === id);
+      if (emp) {
+        Object.assign(emp, newDetail);
+        console.log("Employee Updated:", emp);
+      } else {
+        console.log("Employee not found.");
+      }
+    }
+
+    // Remove employee by index
+    function removeEmp(index) {
+      if (index >= 0 && index < employees.length) {
+        const removed = employees.splice(index, 1);
+        console.log("Deleted:", removed[0]);
+        console.log("Remaining Employees:", employees);
+      } else {
+        console.log("Invalid index.");
+      }
+    }
+
+    // Search employee by name
+    function searchEmp() {
+      let input = prompt("Enter the employee name?");
+      if (!input) {
+        console.log("Please enter a valid name.");
+        return;
+      }
+
+      let result = employees.filter(e =>
+        e.name.toLowerCase().includes(input.toLowerCase())
+      );
+
+      if (result.length > 0) {
+        console.log("Search Results:", result);
+      } else {
+        console.log("No matching employees found.");
+      }
+    }
+
+    // ---- Sample Data and Operations ----
+
+    addEmp(1, "PRIYA", 40000, "Software Developer");
+    addEmp(2, "SARAN", 50000, "CEO");
+    console.log("All Employees:", employees);
+
+    calculateSal();
+
+    updateEmp(1, { name: "VEL" });
+
+    removeEmp(0); // Removes Mohammed
+
+    searchEmp(); // Will show prompt
+
+  </script>
+</body>
+</html>
