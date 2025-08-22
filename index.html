@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,29 +6,27 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        function reverseWords(sentence) {
-            return sentence.split(" ").reverse().join(" ");
-        }
+      <input type="text" placeholder="enter your list" id="inputvalue">
+     <button onclick="addtask()">add-task</button>
+     <ul id="listcontent"></ul>
+     <script>
+        function addtask(){
+            let textvalue=document.getElementById("inputvalue").value.trim();
+            if(textvalue=== "") return;
+            let li=document.createElement("li");
+            li.textContent=textvalue;
+            document.getElementById("listcontent").appendChild(li);
+            const removebtn=document.createElement("button");
+            removebtn.textContent="remove";
+            removebtn.addEventListener("click",function(e){
+                li.remove();
+            })
+            li.appendChild(removebtn);
 
-        function removeDuplicates(arr) {
-            return [...new Set(arr)];
         }
-
-        function countVowels(str) {
-            const vowels = 'aeiouAEIOU';
-            let count = 0;
-            for (let char of str) {
-                if (vowels.includes(char)) {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-        console.log("Reversed Words:", reverseWords("this is java language"));
-        console.log("Array without duplicates:", removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
-        console.log("Number of vowels:", countVowels("kg"));
-    </script>
+     </script>
+     
+   
+    
 </body>
 </html>
