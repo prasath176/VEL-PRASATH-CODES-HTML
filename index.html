@@ -1,59 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Library Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            #clock{
+                color:#27F561;
+                border: solid;
+                border-radius: 5px;
+                width: 500px;
+                text-align: center;
+                margin-top: 100px;
+                margin-left: 35%;
+                padding: 20px;
+                font-size: 70px;
+        }
+        body{
+            background-color: black;
+        }
+    </style>
 </head>
 <body>
-    <h1>Library Management System</h1>
-    <pre id="output"></pre>
-
+    <div id="clock">loding...</div>
     <script>
-   
-        function log(message) {
-            document.getElementById("output").textContent += message + "\n";
+        function updateclock(){
+            const now=new Date()
+        console.log(now)
+        let hours=now.getHours(now)
+        console.log(hours);
+        const minutes=now.getMinutes(now)
+        console.log(minutes);
+        const seconds=now.getSeconds(now)
+        console.log(seconds);
+        const ampm=hours>12?'pm' :'am';
+        console.log(ampm);
+        hours=hours%12;
+        hours=hours? hours:12;
+        const hh=String(hours).padStart(2,'0');
+        const mm=String(minutes).padStart(2,'0');
+        const ss=String(seconds).padStart(2,'0');
+        const timestring=`${hh}:${mm}:${ss} ${ampm}`;
+        document.getElementById("clock").innerText=timestring;
+    
         }
+        updateclock();
+        setInterval(updateclock,1000);        
 
-        class Book {
-            constructor(title, author, publishedYear) {
-                this.title = title;
-                this.author = author;
-                // 3) Use Date object to store published year
-                this.publishedDate = new Date(publishedYear, 0); // Month 0 = January
-            }
+        
 
-            getSummary() {
-                return `${this.title} by ${this.author}, Published: ${this.publishedDate.getFullYear()}`;
-            }
-        }
-
-
-        class EBook extends Book {
-            constructor(title, author, publishedYear, fileSize) {
-             
-                super(title, author, publishedYear);
-                this.fileSize = fileSize; // in MB
-            }
-
-
-            getSummary() {
-                return `${super.getSummary()} [File size: ${this.fileSize}MB]`;
-            }
-        }
-
-     
-        let book1 = new Book("Pride and Prejudice", "Jane Austen", 1813);
-        let book2 = new Book("The Hobbit", "J.R.R. Tolkien", 1937);
-
-        let ebook1 = new EBook("Digital Fortress", "Dan Brown", 1998, 2.5);
-        let ebook2 = new EBook("You Don't Know JS", "Kyle Simpson", 2015, 3.8);
-
-   
-        log("Library Collection:\n");
-        log(book1.getSummary());
-        log(book2.getSummary());
-        log(ebook1.getSummary());
-        log(ebook2.getSummary());
     </script>
+    
 </body>
 </html>
