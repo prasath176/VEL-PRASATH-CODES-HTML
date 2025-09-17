@@ -1,84 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <style>
+   
+  </style>
 </head>
 <body>
-    <script>
-        // Quantifiers:
-        // quantifiers specify how many times a character or group should appear.
-        let text="aaaba";
-        let pattern=/\a*/g;
-        let result=text.match(pattern);
-        console.log(result);
-        //*-->matches zero or more consecutive as,empty matches, at last it check once again.
-        //+-->doesnt allow empty space,consecutive as together.
-        //?-->matches zero at each position, at last it check once again.
+  <h2>To-Do List</h2>
 
-        //modifiers:
-        // modifiers(flag) change how regex matches.
-        //i-->case insensitive
-        //g-->global match (all occurrances)
-        //m-->multiline match
-        let sentence="javascript programming  language.\njava programming language."
-        let pattern2=/\programming+/igm;
-        let result2=sentence.match(pattern2);
-        console.log(result2);
+  <input type="text" id="taskInput" placeholder="Enter task" />
+  <button onclick="addTask()">Add Task</button>
 
-       /* Metacharacters:
-              metacharacters have special meaning in regex.
-
-        .-->any character expect newline
-        \d-->digit(0-9)
-        \w-->word character(letters,digits)
-        \s-->whitespace
-        ^-->start of starting line*/
-        let digitchar="001js";
-        let pattern3=/\d+/g;
-        let result3=sentence.match(pattern3);
-        
-
-        /* Grouping:
-           parenthess() are used to group patterns and capture submatches.
-        */
-        
-        let texts="hii velprasath";
-        let pattern4=/(\w+)\s+(\w+)/;
-        let result4=texts.match(pattern4);
-        console.log(result4);
-        console.log(result4[0]);
-        console.log(result4[1]);
-        console.log(result4[2]);
-
-        let fruit="apple banana apple grape";
-        let pattern5=/(apple)/;
-        let result5=pattern5.exec(fruit);
-        console.log(result5[0]);
-        console.log(result5[1]);
-
-      
-        let pattern6=/(apple)/g;
-        let result6=fruit.replace(pattern6,"orange");
-        console.log(result6);
-
-        let pattern7=/\s+/;
-        let result7=fruit.split(pattern7)
-        console.log(result7);
-        
+  <ul id="taskList"></ul>
+  <script>
+  
+document.getElementById("taskInput").value = sessionStorage.getItem("tempTask") || "";
 
 
+document.getElementById("taskInput").addEventListener("input", function () {
+  sessionStorage.setItem("tempTask", this.value);
+});
 
 
+window.onload = function () {
+  loadTasks();
+};
 
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const text = input.value.trim();
+  if (!text) return;
 
-        
-        
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push({ text: text, completed: false });
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 
+  input.value = "";
+  sessionStorage.removeItem("tempTask");
+  loadTasks();
+}
 
+function loadTasks() {
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
 
-    </script>
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.textContent = task.text;
+    if (task.completed) li.classList.add("completed");
+
+    li.onclick = () => toggleTask(index);
     
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+    delBtn.onclick = (e) => {
+      e.stopPropagation(); 
+      deleteTask(index);
+    };
+
+    li.appendChild(delBtn);
+    list.appendChild(li);
+  });
+}
+
+function toggleTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  tasks[index].completed = !tasks[index].completed;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  loadTasks();
+}
+
+function deleteTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  tasks.splice(index, 1);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  loadTasks();
+}
+
+  </script>
+
+ 
 </body>
 </html>
