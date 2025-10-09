@@ -3,77 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App Simulator</title>
-  <style>
-   body{
-    text-align: center;
-   }
-  </style>
+  <title>Menu Driven Calculator</title>
 </head>
 <body>
-  <h2> Weather App Simulator</h2>
-  <button id="sequentialBtn">Fetch Sequentially</button>
-  <button id="parallelBtn">Fetch in Parallel</button>
-  <div id="output"></div>
-
+  <h2>Menu Driven Calculator</h2>
   <script>
-  
-    function getWeather(city) {
-      return new Promise((resolve, reject) => {
-        const delay = Math.random() * 3000 + 1000; 
-        setTimeout(() => {
-          const success = Math.random() > 0.2; 
-          if (success) {
-            const temperature = (Math.random() * 15 + 20).toFixed(1);
-            resolve(` ${city}: ${temperature}°C`);
-          } else {
-            reject(` Failed to fetch weather for ${city}`);
+    let choice;
+
+    do {
+      choice = prompt(
+        "Choose an option:\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Exit"
+      );
+
+      switch (choice) {
+        case "1": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
+          
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue; 
           }
-        }, delay);
-      });
-    }
 
-    const cities = ["Chennai", "Bangalore", "Mumbai", "Delhi"];
-
-    
-    async function fetchSequential() {
-      const output = document.getElementById("output");
-      output.innerHTML = "<p>Fetching weather sequentially...</p>";
-
-      for (const city of cities) {
-        try {
-          const result = await getWeather(city);
-          output.innerHTML += `<div class="city">${result}</div>`;
-        } catch (error) {
-          output.innerHTML += `<div class="city">${error}</div>`;
+          a = Number(a);
+          b = Number(b);
+          alert("Result = " + (a + b));
+          break;
         }
-      }
 
-      output.innerHTML += "<p> Sequential fetching complete!</p>";
-    }
+        case "2": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
 
-    
-    async function fetchParallel() {
-      const output = document.getElementById("output");
-      output.innerHTML = "<p>Fetching weather in parallel...</p>";
-
-      try {
-        const results = await Promise.allSettled(cities.map(city => getWeather(city)));
-        results.forEach((res, i) => {
-          if (res.status === "fulfilled") {
-            output.innerHTML += `<div class="city">${res.value}</div>`;
-          } else {
-            output.innerHTML += `<div class="city">${res.reason}</div>`;
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue;
           }
-        });
-        output.innerHTML += "<p> Parallel fetching complete!</p>";
-      } catch (error) {
-        output.innerHTML += `<p>${error}</p>`;
-      }
-    }
 
-    document.getElementById("sequentialBtn").addEventListener("click", fetchSequential);
-    document.getElementById("parallelBtn").addEventListener("click", fetchParallel);
+          a = Number(a);
+          b = Number(b);
+          alert("Result = " + (a - b));
+          break;
+        }
+
+        case "3": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
+
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue;
+          }
+
+          a = Number(a);
+          b = Number(b);
+          alert("Result = " + (a * b));
+          break;
+        }
+
+        case "4": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
+
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue;
+          }
+
+          a = Number(a);
+          b = Number(b);
+          if (b === 0) {
+            alert("Cannot divide by zero!");
+            continue;
+          }
+
+          alert("Result = " + (a / b));
+          break;
+        }
+
+        case "5":
+          alert("Exiting the program...");
+          break;
+
+        default:
+          alert("Invalid choice! Please select between 1-5.");
+          continue; 
+      }
+    } while (choice !== "5");
   </script>
 </body>
 </html>
